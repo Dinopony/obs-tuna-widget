@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body class="fading-opacity">
+        <section id="left-pane" class="pane">
+            <img id="cover" src="">
+            <section id="left-pane-right-side">
+                <span id="title"></span>
+                <span id="artists"></span>
+            </section>
+        </section>
+
+        <section id="right-pane" class="pane">
+            <section id="right-pane-upper-half">
+                <span id="current-time" class="time">0:00</span>
+                <section class="playing-anim masked-if-idle">
+                    <div class="playing-anim-bar"></div>
+                    <div class="playing-anim-bar"></div>
+                    <div class="playing-anim-bar"></div>
+                </section>
+                <span id="total-time" class="time">4:48</span>
+            </section>
+            <div id="progress-bar">
+                <div id="progress-bar-value"></div>
+            </div>
+        </section>
+
+        <script src="./config.js"></script>
+        <script src="./text_scroller.js"></script>
+        <script src="./main.js"></script>
+    </body>
+</html>

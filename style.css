@@ -1,0 +1,173 @@
+/* ====================================================
+                CUSTOMIZABLE VARIABLES
+   ==================================================== */
+
+:root {
+    --widget-height: 128px;             /* the height of the full widget */
+    --widget-background: white;       /* the background color of widget panes */
+
+    --left-pane-width: 520px;           /* the width of the left pane */
+    --right-pane-width: 180px;          /* the width of the right pane */
+
+    --title-font: bold 36px 'Tahoma';   /* the font used for displaying the title */
+    --artists-font: 28px 'Tahoma';      /* the font used for displaying the artists */
+    --times-font: bold 20px 'Tahoma';   /* the font used for displaying the time values */
+
+    --left-pane-text-adjustment: -8px;  /* vertical adjustment for the text in the left pane */
+
+    --gap-between-panes: 10px;          /* horizontal gap between left and right panes */
+    --gap-cover-and-text: 20px;         /* the horizontal spacing between the album cover and text in the pane */
+    --gap-title-artists: 5px;           /* vertical gap "title" and "artists" text */
+    --gap-time-and-progress: 15px;      /* vertical gap between the time texts and the progress bar */
+    
+    --progress-bar-inactive-color: darkgray;  /* the color of the unfilled song progress bar */
+    --progress-bar-active-color: green;       /* the color of the filled song progress bar */
+}
+
+
+/* ====================================================
+                    GLOBAL RULES
+   ==================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 5px;
+    background: transparent;
+}
+
+body {
+    display: flex;
+    gap: var(--gap-between-panes);
+}
+
+.pane {
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+
+    height: var(--widget-height);
+    background: var(--widget-background);
+    box-shadow: rgba(0,0,0,0.4) 5px 5px 5px;  /* the shadow effect dropped below the panes */
+}
+
+.fading-opacity {
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+/* ====================================================
+            LEFT PANE (cover + title + artists)
+   ==================================================== */
+
+#left-pane {
+    width: var(--left-pane-width);
+}
+
+#left-pane-right-side {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    padding: 0 var(--gap-cover-and-text);     
+    margin-top: var(--left-pane-text-adjustment);
+    gap: var(--gap-title-artists);
+}
+
+#title {
+    white-space: nowrap;
+    font: var(--title-font);
+}
+
+#artists {
+    white-space: nowrap;
+    font: var(--artists-font);
+}
+
+#cover {
+    width: var(--widget-height);
+    height: 100%;
+    visibility: hidden;   /* cover starts hidden to mask the "broken image" style */
+}
+
+
+/* ====================================================
+                    RIGHT PANE (progress)
+   ==================================================== */
+
+#right-pane {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: var(--gap-time-and-progress);
+    padding: 0 20px;
+    width: var(--right-pane-width);
+}
+
+#right-pane-upper-half {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.time {
+    font: var(--times-font);
+}
+
+#progress-bar {
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--progress-bar-inactive-color);
+}
+
+#progress-bar-value {
+    width: 20px;
+    height: 100%;
+    border-radius: 10px;
+    background: var(--progress-bar-active-color);
+}
+
+
+/* ====================================================
+            "NOW PLAYING" BARS ANIMATION
+   ==================================================== */
+
+.playing-anim {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 30px;
+}
+
+.playing-anim-bar {
+    width: 6px;
+    height: 0px;
+    border-radius: 8px;
+    background: green;
+
+    animation: nowPlayingAnimation 0.4s ease-in-out infinite alternate;
+}
+
+.playing-anim > .playing-anim-bar:nth-child(1) {
+    animation-delay: -1s;
+}
+.playing-anim > .playing-anim-bar:nth-child(3) {
+    animation-delay: -0.7s;
+}
+
+@keyframes nowPlayingAnimation {
+  0% {
+    height: 10px;
+  }
+  100% {
+    height: 25px;
+  }
+}
